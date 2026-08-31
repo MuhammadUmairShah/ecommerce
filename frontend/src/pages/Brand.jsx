@@ -1,38 +1,43 @@
 import React, { useState } from "react";
 
 import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 
-let Productcreate = () => {
+let Brand = () => {
   let navigate = useNavigate();
 
   let [data, setData] = useState({
     title: "",
-    description: "",
     Imageurl: "",
-    price: 0,
-    quality: "",
     stock: 0,
-    size: "",
-    
     category: "",
-    discount: 0,
   });
 
-
+  const handilsubmite = async (e) => {
+    e.preventDefault();
+    try {
+      // Changed 'formData' to 'data' to match your state variable name
+      const response = await axios.post('http://localhost:4000/brand/brandcreate', data);
+      console.log('Success:', response.data);
+    } catch (err) {
+      console.error('Server Error:', err.response?.data || err.message);
+      alert('Something went wrong on the server. Please try again later.');
+    }
+  };
   return (
     <div className="min-h-screen bg-white text-black flex">
 
       
 
-      <div className="flex-1 min-h-screen p-4 overflow-y-auto">
+      <div className="flex-1 min-h-screen w-50">
 
         <div className="max-w-2xl mx-auto">
 
           {/* Heading */}
           <div className="mb-5">
             <h1 className="text-2xl font-bold">
-              Create Product
+              Create Brand
             </h1>
 
             <p className="text-zinc-500 text-sm mt-1">
@@ -47,9 +52,9 @@ let Productcreate = () => {
 
               {/* Title */}
               <div className="md:col-span-2">
-                <label className="block text-xs text-zinc-400 mb-1">
+                <h1 className="block text-xs text-zinc-400 mb-1">
                   Product Title
-                </label>
+                </h1>
 
                 <input
                   onChange={(event) =>
@@ -66,9 +71,9 @@ let Productcreate = () => {
 
               {/* Image URL */}
               <div className="md:col-span-2">
-                <label className="block text-xs text-zinc-400 mb-1">
+                <h1 className="block text-xs text-zinc-400 mb-1">
                   Image URL
-                </label>
+                </h1>
 
                 <input
                   onChange={(event) =>
@@ -83,43 +88,9 @@ let Productcreate = () => {
                 />
               </div>
 
-              {/* Price */}
-              <div>
-                <h1 className="block text-xs text-zinc-400 mb-1">
-                  Price
-                </h1>
+             
 
-                <input
-                  onChange={(event) =>
-                    setData({
-                      ...data,
-                      price: (event.target.value),
-                    })
-                  }
-                  type="number"
-                  placeholder="Enter price"
-                  className="w-full bg-zinc-800 border border-zinc-700 text-white p-2.5 rounded-lg outline-none focus:border-[#d4af37] transition"
-                />
-              </div>
-
-              {/* Quality */}
-              <div>
-                <h1 className="block text-xs text-zinc-400 mb-1">
-                  Quality
-                </h1>
-
-                <input
-                  onChange={(event) =>
-                    setData({
-                      ...data,
-                      quality: event.target.value,
-                    })
-                  }
-                  type="text"
-                  placeholder="Enter quality"
-                  className="w-full bg-zinc-800 border border-zinc-700 text-white p-2.5 rounded-lg outline-none focus:border-[#d4af37] transition"
-                />
-              </div>
+             
 
               {/* Stock */}
               <div>
@@ -140,29 +111,7 @@ let Productcreate = () => {
                 />
               </div>
 
-              {/* Size */}
-              <div>
-                <p className="block text-xs text-zinc-400 mb-1">
-                  Size
-                </p>
-
-                <select
-                  onChange={(event) =>
-                    setData({
-                      ...data,
-                      size: event.target.value,
-                    })
-                  }
-                  className="w-full bg-zinc-800 border border-zinc-700 text-white p-2.5 rounded-lg outline-none"
-                >
-                  <option value="">Select Size</option>
-                  <option value="Small">Small</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Large">Large</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
-                </select>
-              </div>
+             
 
               {/* Category */}
               <div>
@@ -188,34 +137,17 @@ let Productcreate = () => {
                 </select>
               </div>
 
-              {/* Discount */}
-              <div>
-                <label className="block text-xs text-zinc-400 mb-1">
-                  Discount
-                </label>
-
-                <input
-                  onChange={(event) =>
-                    setData({
-                      ...data,
-                      discount: (event.target.value),
-                    })
-                  }
-                  type="number"
-                  placeholder="Enter discount"
-                  className="w-full bg-zinc-800 border border-zinc-700 text-white p-2.5 rounded-lg outline-none focus:border-[#d4af37] transition"
-                />
-              </div>
-
+             
 
             </div>
 
             {/* Button */}
             <button
+            onClick={ handilsubmite}
               type="button"
               className="w-full mt-5 bg-[#d4af37] text-black font-semibold py-2.5 rounded-lg hover:bg-[#b8962e] transition duration-300"
             >
-              Create Product
+              Create Brand
             </button>
 
           </div>
@@ -226,4 +158,4 @@ let Productcreate = () => {
   );
 };
 
-export default Productcreate;
+export default Brand;

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from 'react'
 import Home from "./pages/Home";
-import Productcreate from "./pages/Productcreate";
+import Productcreate from "./pages/Brand";
 
 const App = () => {
   return (
